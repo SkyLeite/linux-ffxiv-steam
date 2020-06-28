@@ -1,5 +1,6 @@
 import os
 import platform
+import time
 import sys
 from ctypes import CDLL
 
@@ -31,9 +32,11 @@ def is_ffxiv_running():
 
 def wait_for_ffxiv():
     while not is_ffxiv_running():
+        time.sleep(1)
         pass
     
 if __name__ == '__main__':
+    print("Steam integration running. Waiting for FFXIV...")
     wait_for_ffxiv() # Wait for FFXIV to launch
     
     # Start Steam API
@@ -42,6 +45,7 @@ if __name__ == '__main__':
     get_steam_api().SteamAPI_Init()
 
     while is_ffxiv_running():
+        time.sleep(1)
         pass
     
     print("FFXIV exited. Bye bye")
