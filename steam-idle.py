@@ -4,13 +4,17 @@ import time
 import sys
 from ctypes import CDLL
 
+print(sys.path[0])
+
 def get_steam_api():
+    script_location = sys.path[0] + "/"
+    
     if platform.architecture()[0].startswith('32bit'):
         print('Loading Linux 32bit library')
-        return CDLL('./libsteam_api_32.so')
+        return CDLL(script_location + 'libsteam_api_32.so')
     elif platform.architecture()[0].startswith('64bit'):
         print('Loading Linux 64bit library')
-        return CDLL('./libsteam_api_64.so')
+        return CDLL(script_location + 'libsteam_api_64.so')
     else:
         print('Linux architecture not supported')
         sys.exit()
